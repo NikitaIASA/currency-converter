@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import InputBlock from "../InputBlock";
 import classes from "./Home.module.scss";
@@ -9,14 +9,20 @@ const Home = ({
   currencyFrom,
   setCurrencyFrom,
   setCurrencyTo,
-  setExchangeRate,
   currencyTo,
   exchangeRate,
   currencyList,
+  amountFrom,
+  amountTo,
+  setAmountTo,
+  setAmountFrom,
 }) => {
-  const [amountFrom, setAmountFrom] = useState(0);
-  const [amountTo, setAmountTo] = useState(0);
-  const [showOtherCurrencies, setShowOtherCurrencies] = useState(false);
+
+
+  // const switchCurrencies = () => {
+  //   setCurrencyFrom(currencyTo);
+  //   setCurrencyTo(currencyFrom);
+  // };
 
   const handleAmountFromChange = (event) => {
     const newAmountFrom = parseFloat(event.target.value);
@@ -35,44 +41,24 @@ const Home = ({
   return (
     <div className={classes.converter}>
       <InputBlock
+        currencyList={currencyList}
         mainCurrencies={mainCurrencies}
         currency={currencyFrom}
         amount={amountFrom}
         handleAmountChange={handleAmountFromChange}
         setAmount={setCurrencyFrom}
       />
+      {/* <button className={classes.switchButton} onClick={switchCurrencies}>
+        &#8596;
+      </button> */}
       <InputBlock
+        currencyList={currencyList}
         mainCurrencies={mainCurrencies}
         currency={currencyTo}
         amount={amountTo}
         handleAmountChange={handleAmountToChange}
         setAmount={setCurrencyTo}
       />
-      {/* <div>
-        <label>From:</label>
-        <select
-          value={currencyFrom}
-          onChange={(event) => setCurrencyFrom(event.target.value)}
-        >
-          {currencyList.map((currency) => (
-            <option key={currency} value={currency}>
-              {currency}
-            </option>
-          ))}
-        </select>
-      </div> */}
-      {/* <div>
-        <select
-          value={currencyTo}
-          onChange={(event) => setCurrencyTo(event.target.value)}
-        >
-          {currencyList.map((currency) => (
-            <option key={currency} value={currency}>
-              {currency}
-            </option>
-          ))}
-        </select>
-      </div> */}
     </div>
   );
 };

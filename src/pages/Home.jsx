@@ -7,14 +7,14 @@ const HomePage = () => {
   const [currencyTo, setCurrencyTo] = useState("UAH");
   const [exchangeRate, setExchangeRate] = useState(0);
   const [currencyList, setCurrencyList] = useState([]);
-  // const [isLoading, setIsLoading] = useState(true);
+  const [amountFrom, setAmountFrom] = useState(0);
+  const [amountTo, setAmountTo] = useState(0);
 
   useEffect(() => {
     const fetchCurrencyList = async () => {
       try {
         const list = await getCurrencyList();
         setCurrencyList(list);
-        console.log(list);
       } catch (error) {
         console.error(error);
       }
@@ -28,13 +28,30 @@ const HomePage = () => {
       try {
         const rates = await getExchangeRate(currencyFrom, currencyTo);
         setExchangeRate(rates);
-        console.log(rates);
       } catch (error) {
         console.error(error);
       }
     };
     fetchExchangeRate();
   }, [currencyFrom, currencyTo]);
+
+  useEffect(() => {
+    const savedData = JSON.parse(localStorage.getItem("exchangeData")) || {};
+    setCurrencyFrom(savedData.currencyFrom || "USD");
+    setCurrencyTo(savedData.currencyTo || "UAH");
+    setAmountFrom(savedData.amountFrom || 0);
+    setAmountTo(savedData.amountTo || 0);
+  }, []);
+  
+  useEffect(() => {
+    const data = {
+      currencyFrom,
+      currencyTo,
+      amountFrom,
+      amountTo,
+    };
+    localStorage.setItem("exchangeData", JSON.stringify(data));
+  }, [currencyFrom, currencyTo, amountFrom, amountTo]);
 
   return (
     <Home
@@ -43,8 +60,11 @@ const HomePage = () => {
       setCurrencyTo={setCurrencyTo}
       currencyTo={currencyTo}
       exchangeRate={exchangeRate}
-      setExchangeRate={setExchangeRate}
       currencyList={currencyList}
+      amountFrom={amountFrom}
+      amountTo={amountTo}
+      setAmountFrom={setAmountFrom}
+      setAmountTo={setAmountTo}
     />
   );
 };
