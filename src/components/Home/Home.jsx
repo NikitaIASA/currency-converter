@@ -18,7 +18,7 @@ const Home = ({
   amountFrom,
   amountTo,
   setAmountTo,
-  setAmountFrom,
+  setAmountFrom
 }) => {
   // Afunction to switch currencies when the user clicks on the arrows
   const switchCurrencies = () => {
@@ -33,7 +33,7 @@ const Home = ({
     setAmountFrom(newAmountFrom);
     setAmountTo(newAmountTo);
   };
-  
+
   // A function to handle changes in the "to" input field
   const handleAmountToChange = (event) => {
     const newAmountTo = parseFloat(event.target.value);

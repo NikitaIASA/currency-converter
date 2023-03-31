@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useSnackbar } from 'notistack';
 import Home from "../components/Home";
 import { getExchangeRate, getCurrencyList } from "../api/currenciesAPI";
 
 const HomePage = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const [currencyFrom, setCurrencyFrom] = useState("USD");
   const [currencyTo, setCurrencyTo] = useState("UAH");
   const [exchangeRate, setExchangeRate] = useState(0);
@@ -21,7 +23,7 @@ const HomePage = () => {
         setCurrencyRates(list.rates);
         setLastDateUpdate(list.time_last_updated);
       } catch (error) {
-        console.error(error);
+        enqueueSnackbar("Fetching data failed", {variant: 'error'});
       }
     };
 
@@ -36,7 +38,7 @@ const HomePage = () => {
         setExchangeRate(rates);
         console.log(rates);
       } catch (error) {
-        console.error(error);
+        enqueueSnackbar("Exchange failed", {variant: 'error'});
       }
     };
     fetchExchangeRate();
