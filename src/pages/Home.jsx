@@ -28,7 +28,7 @@ const HomePage = () => {
     };
 
     fetchCurrencyData();
-  }, []);
+  }, [enqueueSnackbar]);
 
   // Fetching the exchange rate when either of the currencies change
   useEffect(() => {
@@ -36,33 +36,12 @@ const HomePage = () => {
       try {
         const rates = await getExchangeRate(currencyFrom, currencyTo);
         setExchangeRate(rates);
-        console.log(rates);
       } catch (error) {
         enqueueSnackbar("Exchange failed", {variant: 'error'});
       }
     };
     fetchExchangeRate();
-  }, [currencyFrom, currencyTo]);
-
-// Loading saved data from localStorage on component mount
-  useEffect(() => {
-    const savedData = JSON.parse(localStorage.getItem("exchangeData")) || {};
-    setCurrencyFrom(savedData.currencyFrom || "USD");
-    setCurrencyTo(savedData.currencyTo || "UAH");
-    setAmountFrom(savedData.amountFrom || 0);
-    setAmountTo(savedData.amountTo || 0);
-  }, []);
-
-  // Saving data to localStorage when either of the currencies or amounts change
-  useEffect(() => {
-    const data = {
-      currencyFrom,
-      currencyTo,
-      amountFrom,
-      amountTo,
-    };
-    localStorage.setItem("exchangeData", JSON.stringify(data));
-  }, [currencyFrom, currencyTo, amountFrom, amountTo]);
+  }, [currencyFrom, currencyTo, enqueueSnackbar]);
 
   // Updating the converted amount when either the amount or exchange rate changes
   useEffect(() => {
@@ -71,18 +50,18 @@ const HomePage = () => {
 
   return (
     <Home
-      lastDateUpdate={lastDateUpdate}
-      currencyRates={currencyRates}
       currencyFrom={currencyFrom}
+      currencyTo={currencyTo}
       setCurrencyFrom={setCurrencyFrom}
       setCurrencyTo={setCurrencyTo}
-      currencyTo={currencyTo}
       exchangeRate={exchangeRate}
       currencyList={currencyList}
       amountFrom={amountFrom}
       amountTo={amountTo}
       setAmountFrom={setAmountFrom}
       setAmountTo={setAmountTo}
+      lastDateUpdate={lastDateUpdate}
+      currencyRates={currencyRates}
     />
   );
 };

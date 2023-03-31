@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import AppBar from "../AppBar";
 import InputBlock from "../InputBlock";
 import { TbArrowsRightLeft } from "react-icons/tb";
@@ -18,9 +18,9 @@ const Home = ({
   amountFrom,
   amountTo,
   setAmountTo,
-  setAmountFrom
+  setAmountFrom,
 }) => {
-  // Afunction to switch currencies when the user clicks on the arrows
+  // A function to switch currencies when the user clicks on the arrows
   const switchCurrencies = () => {
     setCurrencyFrom(currencyTo);
     setCurrencyTo(currencyFrom);
@@ -33,7 +33,7 @@ const Home = ({
     setAmountFrom(newAmountFrom);
     setAmountTo(newAmountTo);
   };
-
+  
   // A function to handle changes in the "to" input field
   const handleAmountToChange = (event) => {
     const newAmountTo = parseFloat(event.target.value);
@@ -41,6 +41,26 @@ const Home = ({
     setAmountTo(newAmountTo);
     setAmountFrom(newAmountFrom);
   };
+
+  // Loading saved data from localStorage on component mount
+  useEffect(() => {
+    const savedData = JSON.parse(localStorage.getItem("exchangeData")) || {};
+    setCurrencyFrom(savedData.currencyFrom || "USD");
+    setCurrencyTo(savedData.currencyTo || "UAH");
+    setAmountFrom(savedData.amountFrom || 0);
+    setAmountTo(savedData.amountTo || 0);
+  }, []);
+
+  // Saving data to localStorage when either of the currencies or amounts change
+  useEffect(() => {
+    const data = {
+      currencyFrom,
+      currencyTo,
+      amountFrom,
+      amountTo,
+    };
+    localStorage.setItem("exchangeData", JSON.stringify(data));
+  }, [currencyFrom, currencyTo, amountFrom, amountTo]);
 
   return (
     <>

@@ -46,10 +46,13 @@
 
 .select {
   padding: 20px;
-  outline: none;
   border: 1px solid #cdcdcd;
   border-radius: 0 4px 4px 0;
+  outline: none;
+  cursor: pointer;
+
   @media screen and (max-width: 576px) {
     padding: 9px;
   }
+  
 }
