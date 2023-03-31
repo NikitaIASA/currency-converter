@@ -1,7 +1,13 @@
 .converter {
   display: flex;
-  padding: 50px 100px;
+  align-items: center;
+  padding: 50px 30px;
   gap: 50px;
   background-color: #fff;
+}
+
+.switchArrows {
+  cursor: pointer;
+  margin-bottom: -80px;
 }
 

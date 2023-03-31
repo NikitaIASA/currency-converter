@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
-
+import React from "react";
+import AppBar from "../AppBar";
 import InputBlock from "../InputBlock";
+import { TbArrowsRightLeft } from "react-icons/tb";
 import classes from "./Home.module.scss";
 
 const mainCurrencies = ["USD", "EUR", "UAH"];
 
 const Home = ({
+  lastDateUpdate,
+  currencyRates,
   currencyFrom,
   setCurrencyFrom,
   setCurrencyTo,
@@ -17,12 +20,10 @@ const Home = ({
   setAmountTo,
   setAmountFrom,
 }) => {
-
-
-  // const switchCurrencies = () => {
-  //   setCurrencyFrom(currencyTo);
-  //   setCurrencyTo(currencyFrom);
-  // };
+  const switchCurrencies = () => {
+    setCurrencyFrom(currencyTo);
+    setCurrencyTo(currencyFrom);
+  };
 
   const handleAmountFromChange = (event) => {
     const newAmountFrom = parseFloat(event.target.value);
@@ -39,27 +40,30 @@ const Home = ({
   };
 
   return (
-    <div className={classes.converter}>
-      <InputBlock
-        currencyList={currencyList}
-        mainCurrencies={mainCurrencies}
-        currency={currencyFrom}
-        amount={amountFrom}
-        handleAmountChange={handleAmountFromChange}
-        setAmount={setCurrencyFrom}
-      />
-      {/* <button className={classes.switchButton} onClick={switchCurrencies}>
-        &#8596;
-      </button> */}
-      <InputBlock
-        currencyList={currencyList}
-        mainCurrencies={mainCurrencies}
-        currency={currencyTo}
-        amount={amountTo}
-        handleAmountChange={handleAmountToChange}
-        setAmount={setCurrencyTo}
-      />
-    </div>
+    <>
+      <AppBar currencyRates={currencyRates} lastDateUpdate={lastDateUpdate}  />
+      <div className={classes.converter}>
+        <InputBlock
+          currencyList={currencyList}
+          mainCurrencies={mainCurrencies}
+          currency={currencyFrom}
+          amount={amountFrom}
+          handleAmountChange={handleAmountFromChange}
+          setAmount={setCurrencyFrom}
+        />
+        <div className={classes.switchArrows} onClick={() => switchCurrencies()}>
+          <TbArrowsRightLeft size={36} />
+        </div>
+        <InputBlock
+          currencyList={currencyList}
+          mainCurrencies={mainCurrencies}
+          currency={currencyTo}
+          amount={amountTo}
+          handleAmountChange={handleAmountToChange}
+          setAmount={setCurrencyTo}
+        />
+      </div>
+    </>
   );
 };
 

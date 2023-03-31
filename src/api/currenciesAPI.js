@@ -12,10 +12,11 @@ export const getExchangeRate = async (currencyFrom, currencyTo) => {
 
 export const getCurrencyList = async () => {
   try {
-    const {data} = await axios.get(`https://api.exchangerate-api.com/v4/latest/USD`);
-    return Object.keys(data.rates);
+    const {data} = await axios.get(`https://api.exchangerate-api.com/v4/latest/UAH`);
+    return data;
   } catch (error) {
     console.error(error);
     return [];
   }
 };
+

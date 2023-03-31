@@ -7,20 +7,24 @@ const HomePage = () => {
   const [currencyTo, setCurrencyTo] = useState("UAH");
   const [exchangeRate, setExchangeRate] = useState(0);
   const [currencyList, setCurrencyList] = useState([]);
+  const [currencyRates, setCurrencyRates] = useState({});
   const [amountFrom, setAmountFrom] = useState(0);
   const [amountTo, setAmountTo] = useState(0);
+  const [lastDateUpdate, setLastDateUpdate] = useState(null);
 
   useEffect(() => {
-    const fetchCurrencyList = async () => {
+    const fetchCurrencyData = async () => {
       try {
         const list = await getCurrencyList();
-        setCurrencyList(list);
+        setCurrencyList(Object.keys(list.rates));
+        setCurrencyRates(list.rates);
+        setLastDateUpdate(list.time_last_updated);
       } catch (error) {
         console.error(error);
       }
     };
 
-    fetchCurrencyList();
+    fetchCurrencyData();
   }, []);
 
   useEffect(() => {
@@ -60,6 +64,8 @@ const HomePage = () => {
 
   return (
     <Home
+      lastDateUpdate={lastDateUpdate}
+      currencyRates={currencyRates}
       currencyFrom={currencyFrom}
       setCurrencyFrom={setCurrencyFrom}
       setCurrencyTo={setCurrencyTo}
