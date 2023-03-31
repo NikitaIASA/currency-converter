@@ -1,6 +1,7 @@
 .InputBlock {
   display: flex;
   flex-direction: column;
+  max-width: 100%;
 }
 
 .currencyList {
@@ -14,6 +15,11 @@
     padding: 20px 40px;
     border: 1px solid #cdcdcd;
     cursor: pointer;
+
+    @media screen and (max-width: 576px) {
+      font-size: 11px;
+      padding: 10px 15px;
+    }
     
     &:first-child {
       border-radius: 4px 0 0 4px;
@@ -35,6 +41,7 @@
   margin-top: 20px;
   font-size: 44px;
   height: 150px;
+  width: 100%;
 }
 
 .select {
@@ -42,4 +49,7 @@
   outline: none;
   border: 1px solid #cdcdcd;
   border-radius: 0 4px 4px 0;
+  @media screen and (max-width: 576px) {
+    padding: 9px;
+  }
 }
