@@ -20,18 +20,21 @@ const Home = ({
   setAmountTo,
   setAmountFrom,
 }) => {
+  // Afunction to switch currencies when the user clicks on the arrows
   const switchCurrencies = () => {
     setCurrencyFrom(currencyTo);
     setCurrencyTo(currencyFrom);
   };
 
+  // A function to handle changes in the "from" input field
   const handleAmountFromChange = (event) => {
     const newAmountFrom = parseFloat(event.target.value);
     const newAmountTo = newAmountFrom * exchangeRate;
     setAmountFrom(newAmountFrom);
     setAmountTo(newAmountTo);
   };
-
+  
+  // A function to handle changes in the "to" input field
   const handleAmountToChange = (event) => {
     const newAmountTo = parseFloat(event.target.value);
     const newAmountFrom = newAmountTo / exchangeRate;
@@ -41,7 +44,7 @@ const Home = ({
 
   return (
     <>
-      <AppBar currencyRates={currencyRates} lastDateUpdate={lastDateUpdate}  />
+      <AppBar currencyRates={currencyRates} lastDateUpdate={lastDateUpdate} />
       <div className={classes.converter}>
         <InputBlock
           currencyList={currencyList}
@@ -51,7 +54,10 @@ const Home = ({
           handleAmountChange={handleAmountFromChange}
           setAmount={setCurrencyFrom}
         />
-        <div className={classes.switchArrows} onClick={() => switchCurrencies()}>
+        <div
+          className={classes.switchArrows}
+          onClick={() => switchCurrencies()}
+        >
           <TbArrowsRightLeft size={36} />
         </div>
         <InputBlock

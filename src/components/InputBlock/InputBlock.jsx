@@ -10,10 +10,10 @@ const InputBlock = ({
   handleAmountChange,
   setAmount,
 }) => (
-  <div className={classes.InputBlock}>
+  <div className={classes.inputBlock}>
     <div className={classes.currencyList}>
       <ul className={classes.mainCurrencies}>
-        {mainCurrencies.map((item) => (
+        {mainCurrencies && mainCurrencies.map((item) => (
           <li
             className={`${classes.mainCurrencies__item} ${
               item === currency ? classes.active : ""
@@ -48,7 +48,6 @@ const InputBlock = ({
       value={amount}
       onChange={handleAmountChange}
     />
-    <div></div>
   </div>
 );
 

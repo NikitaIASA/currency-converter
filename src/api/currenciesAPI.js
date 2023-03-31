@@ -1,8 +1,9 @@
-import axios from 'axios';
+import axios from '../axios';
 
-export const getExchangeRate = async (currencyFrom, currencyTo) => {
+// Getting specific Exchange Rate
+export const getExchangeRate = async (currencyFrom, currencyTo) => { 
   try {
-    const { data } = await axios.get(`https://api.exchangerate-api.com/v4/latest/${currencyFrom}`);
+    const { data } = await axios.get(`/${currencyFrom}`);
     return data.rates[currencyTo];
   } catch (error) {
     console.error(error);
@@ -10,9 +11,10 @@ export const getExchangeRate = async (currencyFrom, currencyTo) => {
   }
 };
 
+// Getting list of Currency rates
 export const getCurrencyList = async () => {
   try {
-    const {data} = await axios.get(`https://api.exchangerate-api.com/v4/latest/UAH`);
+    const {data} = await axios.get(`/UAH`);
     return data;
   } catch (error) {
     console.error(error);
