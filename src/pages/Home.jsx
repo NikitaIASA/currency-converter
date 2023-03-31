@@ -28,6 +28,7 @@ const HomePage = () => {
       try {
         const rates = await getExchangeRate(currencyFrom, currencyTo);
         setExchangeRate(rates);
+        console.log(rates);
       } catch (error) {
         console.error(error);
       }
@@ -52,6 +53,10 @@ const HomePage = () => {
     };
     localStorage.setItem("exchangeData", JSON.stringify(data));
   }, [currencyFrom, currencyTo, amountFrom, amountTo]);
+
+  useEffect(() => {
+    setAmountTo(amountFrom * exchangeRate);
+  }, [amountFrom, exchangeRate, currencyFrom, currencyTo]);
 
   return (
     <Home

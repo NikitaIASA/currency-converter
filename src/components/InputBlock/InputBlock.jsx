@@ -47,7 +47,6 @@ const InputBlock = ({
       type="number"
       value={amount}
       onChange={handleAmountChange}
-      placeholder={0}
     />
     <div></div>
   </div>
