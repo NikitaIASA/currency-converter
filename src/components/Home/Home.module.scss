@@ -15,10 +15,12 @@
 }
 
 .switchArrows {
-  cursor: pointer;
   margin-bottom: -80px;
+  cursor: pointer;
+
   @media screen and (max-width: 1100px) {
     margin-bottom: 0;
   }
+
 }
 

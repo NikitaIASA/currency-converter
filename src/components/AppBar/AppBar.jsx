@@ -5,8 +5,8 @@ import classes from "./AppBar.module.scss";
 
 const AppBar = () => {
   const { currencyRates, lastDateUpdate } = useContext(ExchangeContext);
-
   const dateOfLastUpdate = new Date(lastDateUpdate * 1000).toLocaleString();
+  
   return (
     <header className={classes.header}>
       <div className={classes.header__inner}>

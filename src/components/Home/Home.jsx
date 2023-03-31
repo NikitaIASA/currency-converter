@@ -50,7 +50,7 @@ const Home = () => {
     setCurrencyTo(savedData.currencyTo || "UAH");
     setAmountFrom(savedData.amountFrom || 0);
     setAmountTo(savedData.amountTo || 0);
-  }, []);
+  }, [setCurrencyFrom, setCurrencyTo, setAmountFrom, setAmountTo]);
 
   // Saving data to localStorage when either of the currencies or amounts change
   useEffect(() => {

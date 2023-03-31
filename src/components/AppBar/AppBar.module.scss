@@ -1,6 +1,7 @@
 .header {
   padding: 20px;
   background-color: #75af26;
+
   &__inner {
     display: flex;
     justify-content: space-between;
@@ -16,9 +17,11 @@
 }
 
 .actualInfo {
+
   &__rates {
     display: flex;
     padding: 10px 0;
     gap: 10px;
   }
+  
 }

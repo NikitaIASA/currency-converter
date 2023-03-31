@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useSnackbar } from "notistack";
+import React, { useEffect, useContext } from "react";
 import Home from "../components/Home";
 import { getExchangeRate, getCurrencyList } from "../api/currenciesAPI";
 import { ExchangeContext } from "../context/ExchangeContext";
+import { useSnackbar } from "notistack";
 
 const HomePage = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -10,10 +10,10 @@ const HomePage = () => {
     currencyFrom,
     currencyTo,
     exchangeRate,
-    amountFrom,
     setExchangeRate,
     setCurrencyList,
     setCurrencyRates,
+    amountFrom,
     setAmountTo,
     setLastDateUpdate,
   } = useContext(ExchangeContext);
