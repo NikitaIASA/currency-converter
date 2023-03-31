@@ -1,25 +1,26 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useContext} from "react";
 import AppBar from "../AppBar";
 import InputBlock from "../InputBlock";
 import { TbArrowsRightLeft } from "react-icons/tb";
 import classes from "./Home.module.scss";
+import { ExchangeContext } from "../../context/ExchangeContext";
 
 const mainCurrencies = ["USD", "EUR", "UAH"];
 
-const Home = ({
-  lastDateUpdate,
-  currencyRates,
-  currencyFrom,
-  setCurrencyFrom,
-  setCurrencyTo,
-  currencyTo,
-  exchangeRate,
-  currencyList,
-  amountFrom,
-  amountTo,
-  setAmountTo,
-  setAmountFrom,
-}) => {
+const Home = () => {
+  const {
+    currencyFrom,
+    setCurrencyFrom,
+    currencyTo,
+    setCurrencyTo,
+    exchangeRate,
+    currencyList,
+    amountFrom,
+    setAmountFrom,
+    amountTo,
+    setAmountTo,
+  } = useContext(ExchangeContext);
+
   // A function to switch currencies when the user clicks on the arrows
   const switchCurrencies = () => {
     setCurrencyFrom(currencyTo);
@@ -64,7 +65,7 @@ const Home = ({
 
   return (
     <>
-      <AppBar currencyRates={currencyRates} lastDateUpdate={lastDateUpdate} />
+      <AppBar/>
       <div className={classes.converter}>
         <InputBlock
           currencyList={currencyList}
