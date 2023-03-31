@@ -16,4 +16,6 @@ The front-end of the application is built using:
  
  - Application built with Exchange Rate API.
  
- # Installation and run: npm install, npm run
+ # Installation and run: 
+ 
+ npm install, npm run
